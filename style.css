@@ -1,13 +1,111 @@
 @font-face {
-    font-family: jet;
-    src: url(./add/fonts/JetBrains_Mono/);
+    font-family: brains;
+    src: url(./add/fonts/JetBrains_Mono/JetBrainsMono-VariableFont_wght.ttf);
 }
 html{
     margin: 0;
     padding: 0;
 }
-body{
-    background-color: rgb(230, 230, 230);
+
+:root {
+    --bg-main: rgb(235, 235, 235);    /* Тот самый молочный фон */
+    --bg-white: #ffffff;
+    --text-dark: #2d3436;
+    --border-color: #e0e0e0;
+    --accent-video: #ff7675; /* Цвет для видео-плашки */
+    --accent-web: #74b9ff;   /* Цвет для веб-плашки */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: brains;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    line-height: 1.6;
     margin: 0;
     padding: 0;
+}
+
+/* Шапка с эффектом стекла */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(7px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Лента вакансий */
+.content {
+    flex: 3;
+    padding: 30px;
+}
+
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Чистая карточка */
+.job-card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.job-title { font-size: 1.2rem; margin: 10px 0; }
+
+/* Овальные плашки */
+.pill {
+    display: inline-block;
+    padding: 5px 15px;
+    margin-top: 14px ;
+    border-radius: 50px; /* Делаем овал */
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+}
+.pill-video { background-color: var(--accent-video); }
+.pill-web { background-color: var(--accent-web); }
+
+/* Правая панель (Закрепленная) */
+.sidebar {
+    flex: 1;
+    height: 100vh;
+    position: sticky;
+    top: 80px; /* Отступ под шапку */
+    background: var(--bg-white);
+    padding: 30px;
+    border-left: 1px solid var(--border-color);
+    overflow-y: auto;
+}
+
+.skill-group { margin-bottom: 25px; }
+.skill-group label { display: block; margin: 8px 0; cursor: pointer; }
+
+.ai-summary{
+    font-size: 16px;
+    color: #8d8d8d;
+    line-height: 18px;
+}
+
+.card-header{
+    font-size: 14px;
 }
