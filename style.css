@@ -29,13 +29,14 @@ body {
 
 /* Шапка с эффектом стекла */
 .header {
-    position: sticky;
+    position: relative;
+    width: 80vw;
     top: 0;
     z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 40px;
+    padding: 20px 50px;
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(7px);
     border-bottom: 1px solid var(--border-color);
@@ -68,6 +69,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: 10px;
 }
 
 .job-title { font-size: 1.2rem; margin: 10px 0; }
@@ -89,12 +91,16 @@ body {
 .sidebar {
     flex: 1;
     height: 100vh;
-    position: sticky;
-    top: 80px; /* Отступ под шапку */
+    width: 20vw;
+    position: absolute;
+    right: 0;
+    top: 0px; 
     background: var(--bg-white);
-    padding: 30px;
+    padding: 2.5vw;
     border-left: 1px solid var(--border-color);
     overflow-y: auto;
+    margin: 0;
+    z-index: 100;
 }
 
 .skill-group { margin-bottom: 25px; }
@@ -108,4 +114,15 @@ body {
 
 .card-header{
     font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+.logo_img{
+    height: 30px;
 }
