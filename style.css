@@ -8,7 +8,7 @@ html{
 }
 
 :root {
-    --bg-main: rgb(235, 235, 235);    /* Тот самый молочный фон */
+    --bg-main: rgb(235, 235, 235);  
     --bg-white: #ffffff;
     --text-dark: #2d3436;
     --border-color: #e0e0e0;
@@ -28,7 +28,6 @@ body {
     height: 200vh;
 }
 
-/* Шапка с эффектом стекла */
 .header {
     position: relative;
     width: 80vw;
@@ -44,21 +43,25 @@ body {
 }
 
 .wrapper {
-    display: flex;
     width: 70vw;
     margin: 0 ;
 }
 
-/* Лента вакансий */
 .content {
-    padding:20px 5vw;
+    padding:20px 4vw;
+}
+.sources-bar{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .job-cards-block{
     display: flex;
     flex-wrap:wrap;
 }
 .job-card {
-    width: 60vw;
+    width: 80%;
     min-width: 300px;
     background: var(--bg-white);
     border-radius: 16px;
@@ -173,9 +176,16 @@ body {
 .search_icon{
     height: 40px;
 }
+
 .appfrom_icon{
     height: 24px;
     width: 24px;
+    cursor: pointer;
+}
+
+.add-source{
+    border: none;
+    background-color: #00000000;
 }
 .input_search-skills{
         width: 100%;
