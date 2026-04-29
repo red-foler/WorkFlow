@@ -110,7 +110,6 @@ body {
     z-index: 100;
 }
 
-.skill-group { margin-bottom: 25px; }
 .skill-group label { display: block; margin: 8px 0; cursor: pointer; }
 
 .ai-summary{
@@ -202,4 +201,36 @@ body {
     outline: none;
     border: 2px solid rgba(0, 140, 255, 0.4);
     text-decoration: none;
+}
+
+
+
+
+
+/* 1. Прячем подменю по умолчанию */
+.submenu {
+    display: grid;
+    grid-template-rows: 0fr; /* Высота 0 */
+    transition: grid-template-rows 0.3s ease-out; /* Плавность */
+    overflow: hidden;
+}
+
+/* 2. Контейнер для чекбоксов, чтобы они не дергались */
+.submenu-content {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px 0 10px 10px; /* Небольшой отступ слева и сверху */
+}
+
+/* 3. Когда мы кликаем, JS добавляет класс .active, и всё раскрывается */
+.skill-group.active .submenu {
+    grid-template-rows: 1fr; /* Раскрываем на всю высоту контента */
+}
+
+/* 4. Опционально: добавь курсор, чтобы было понятно, что можно кликать */
+.skill-group h4 {
+    cursor: pointer;
+    user-select: none; /* Чтобы текст не выделялся синим при клике */
 }

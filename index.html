@@ -54,25 +54,37 @@
         </main>
 
         <aside class="sidebar">
-            <h3>ВЫБЕРИТЕ ВАШИ НАВЫКИ:</h3>
-            <div class="skill-search">
-                <input type="text" placeholder="Поиск навыков..." class="input_search-skills">
-            </div><p style="font-size: 13px;color: red;">НЕОБХОДИМО выбрать минимум 1 пункт</p>
-            
-            <div class="skill-group">
-                <h4>Web Development</h4>
+    <h3>ВЫБЕРИТЕ ВАШИ НАВЫКИ:</h3>
+    <div class="skill-search">
+        <input type="text" placeholder="Поиск навыков..." class="input_search-skills">
+    </div>
+    <p style="font-size: 13px; color: red;">НЕОБХОДИМО выбрать минимум 1 пункт</p>
+
+    <div class="skill-group">
+        <h4 onclick="toggleCategory(this)" style="cursor: pointer;">Web Development</h4>
+        
+        <div class="submenu">
+            <div class="submenu-content">
                 <label><input type="checkbox"> React</label>
                 <label><input type="checkbox"> Node.js</label>
                 <label><input type="checkbox"> CSS / HTML</label>
             </div>
+        </div>
+    </div>
 
-            <div class="skill-group">
-                <h4>Video Edit</h4>
+    <div class="skill-group">
+        <h4 onclick="toggleCategory(this)" style="cursor: pointer;">Video Edit</h4>
+        
+        <div class="submenu">
+            <div class="submenu-content">
                 <label><input type="checkbox"> Premiere Pro</label>
                 <label><input type="checkbox"> After Effects</label>
             </div>
-        </aside>
+        </div>
     </div>
-    
+</aside>
+        
+    </div>
+    <script src="./main.js"></script>
 </body>
 </html>
