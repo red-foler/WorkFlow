@@ -8,7 +8,7 @@ html{
 }
 
 :root {
-    --bg-main: rgb(235, 235, 235);  
+    --bg-main: rgb(240, 240, 240);  
     --bg-white: #ffffff;
     --text-dark: #2d3436;
     --border-color: #e0e0e0;
@@ -73,6 +73,7 @@ body {
     justify-content: space-between;
     margin: 15px;
     transition: 0.2s ease-in-out;
+    position: relative;
 }
 .job-card:hover{
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
@@ -81,10 +82,19 @@ body {
 }
 .job-title { font-size: 1.2rem; margin: 10px 0; }
 
+.salary{
+    font-size: 24px;
+    font-weight: 500;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+
 /* Овальные плашки */
 .pill {
     display: inline-block;
-    padding: 5px 15px;
+    padding: 3px 10px;
     margin-top: 14px ;
     border-radius: 50px;
     font-size: 0.8rem;
@@ -193,7 +203,6 @@ body {
 
 
 
-
 /* 1. Прячем подменю по умолчанию */
 .submenu {
     display: grid;
@@ -201,7 +210,24 @@ body {
     transition: grid-template-rows 0.3s ease-out; /* Плавность */
     overflow: hidden;
 }
-
+#skill-error{
+    color: red;
+    font-size: 13px;
+    transition: 0.2s;
+}
+.btn-clear{
+    height: 0px;
+    font-size: 0px;
+    border-radius: 50px;
+    border: 2px solid rgba(0, 0, 0, 0.6);
+    background-color: #ffffff;
+    color: #515151;
+    padding: 3px 5px;
+    margin: 0;
+    transition: 0.2s;
+    opacity: 0;
+    cursor: pointer;
+}
 /* 2. Контейнер для чекбоксов, чтобы они не дергались */
 .submenu-content {
     min-height: 0;

@@ -27,6 +27,7 @@
 
     <div class="job-cards-block">
                 <div class="job-card">
+                    <p class="salary">20$/h</p>
                     <div class="card-header reddit"><img src="./add/img/icons/reddit.png" class="appfrom_icon"> Reddit</div>
                     <h2 class="job-title">Видеомонтаж 2К для YouTube</h2>
                     <div class="ai-summary">
@@ -40,6 +41,7 @@
 
              
                 <div class="job-card">
+                    <p class="salary">unspec</p>
                     <div class="card-header reddit"><img src="./add/img/icons/telegram.svg" class="appfrom_icon"> Telegram</div>
                     <h2 class="job-title">Видеомонтаж 2К для YouTube</h2>
                     <div class="ai-summary">
@@ -53,13 +55,16 @@
             
         </main>
 
-        <aside class="sidebar">
-    <h3>ВЫБЕРИТЕ ВАШИ НАВЫКИ:</h3>
 
-    <p id="skill-error" style="font-size: 13px; color: red;display: none;">НЕОБХОДИМО выбрать минимум 1 пункт</p>
+
+
+        <aside class="sidebar">
+    <h3 style="margin-bottom: 15px;">ВЫБЕРИТЕ ВАШИ НАВЫКИ:</h3>
+    <p id="skill-error">НЕОБХОДИМО выбрать<br> минимум 1 пункт</p>
+    <button id="clear-all" class="btn-clear">Сбросить всё</button>
 
     <div class="skill-group">
-        <h4 onclick="toggleCategory(this)" style="cursor: pointer;">Web Development</h4>
+        <h4 onclick="toggleCategory(this)" style="cursor: pointer;">Web-Development</h4>
         
         <div class="submenu">
             <div class="submenu-content">
