@@ -22,7 +22,7 @@ function validateSkills() {
         clearBtn.style.opacity = '1';  // Показываем кнопку сброса
         clearBtn.style.fontSize = '18px';
         clearBtn.style.height = '30px';
-        clearBtn.style.margin = '0 0 8px 0';
+        clearBtn.style.margin = '15px 0 15px 0';
         clearBtn.style.pointerEvents = 'auto'; // Делаем кнопку кликабельной
     } else {
         errorLabel.style.opacity = '1';
@@ -44,8 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function filterJobs() {
         // Собираем массив выбранных навыков
         const activeSkills = Array.from(checkboxes)
-            .filter(cb => cb.checked)
-            .map(cb => cb.parentElement.textContent.trim());
+    .filter(cb => cb.checked)
+    .map(cb => {
+        // Если это чекбокс категории, у которой есть вложенные элементы,
+        // нам нужно собрать и их названия тоже.
+        const parentGroup = cb.closest('.skill-group, .filter-section');
+        const labels = parentGroup.querySelectorAll('.label-text, h4, .section-title');
+        
+        return Array.from(labels).map(label => label.textContent.trim());
+    })
+    .flat(); // Превращаем массив массивов в один плоский список
 
         console.log("Выбрано в меню:", activeSkills);
 
