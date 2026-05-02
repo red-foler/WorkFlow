@@ -24,9 +24,10 @@ function validateSkills() {
     } else {
         errorLabel.style.opacity = '1';
         errorLabel.style.fontSize = '13px';
-        errorLabel.style.lineHeight = '20px';
+        errorLabel.style.lineHeight = '15px';
         clearBtn.style.opacity = '0';
         clearBtn.style.height = '0px';
+        clearBtn.style.margin = '0';
         clearBtn.style.pointerEvents = 'none';
     }
 }
@@ -54,18 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
                               activeSkills.some(skill => cardCategories.includes(skill));
 
             if (isVisible) {
-                // Если карточка должна появиться
-                if (card.style.display !== 'block') {
-                    card.style.display = 'block';
-                    
-                    // Сбрасываем анимацию, чтобы она проигралась заново
-                    card.classList.remove('show-animation');
-                    void card.offsetWidth; // Магия: заставляем браузер пересчитать элемент
-                    
-                    // Добавляем класс с нашей новой анимацией newJob
-                    card.classList.add('show-animation');
-                }
-            } else {
+    if (card.style.display !== 'block') {
+        card.style.display = 'block';
+        
+        card.classList.remove('show-animation');
+        void card.offsetWidth; 
+        card.classList.add('show-animation');
+
+        // ДОБАВЬ ЭТОТ КУСОК:
+        card.addEventListener('animationend', () => {
+            card.classList.remove('show-animation');
+        }, { once: true }); 
+    }
+} else {
                 // Если карточка скрывается
                 card.style.display = 'none';
                 card.classList.remove('show-animation');
