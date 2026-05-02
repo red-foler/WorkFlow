@@ -1,64 +1,77 @@
+// 1. Функция раскрытия категорий (оставляем как была)
 function toggleCategory(element) {
-    // Находим ближайшего родителя с классом skill-group
     const parent = element.closest('.skill-group');
-    // Переключаем ему класс active
     parent.classList.toggle('active');
 }
 
-
-// 1. Находим нужные элементы
+// Константы для элементов, которые нужны везде
 const errorLabel = document.getElementById('skill-error');
-const allCheckboxes = document.querySelectorAll('.skill-group input[type="checkbox"]');
+const clearBtn = document.getElementById('clear-all');
 
-// 2. Функция проверки
+// 2. Функция проверки (ошибка и появление кнопки "Сбросить")
 function validateSkills() {
-    // Считаем, сколько галочек сейчас нажато
     const checkedCount = document.querySelectorAll('.skill-group input[type="checkbox"]:checked').length;
 
     if (checkedCount > 0) {
-        errorLabel.style.color = '#00000000'; // Прячем ошибку
+        errorLabel.style.opacity = '0'; // Скрываем текст ошибки
         errorLabel.style.fontSize = '10px';
-        errorLabel.style.lineHeight = '5px';
-        clearBtn.style.opacity = '1';
+        errorLabel.style.lineHeight = '3px';
+        clearBtn.style.opacity = '1';  // Показываем кнопку сброса
         clearBtn.style.fontSize = '18px';
         clearBtn.style.height = '30px';
-        clearBtn.style.margin = '8px 0';
-        
+        clearBtn.style.margin = '0 0 8px 0';
+        clearBtn.style.pointerEvents = 'auto'; // Делаем кнопку кликабельной
     } else {
-        errorLabel.style.color = 'red'; // Показываем ошибку
+        errorLabel.style.opacity = '1';
         errorLabel.style.fontSize = '13px';
-        errorLabel.style.lineHeight ='20px';
+        errorLabel.style.lineHeight = '20px';
         clearBtn.style.opacity = '0';
         clearBtn.style.height = '0px';
-        clearBtn.style.fontSize = '10px';
-        clearBtn.style.margin = '0';
+        clearBtn.style.pointerEvents = 'none';
     }
 }
 
-// 3. Вешаем "слушатель" на каждый чекбокс
-allCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', validateSkills);
-});
+// 3. Основная логика после загрузки страницы
+document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('.skill-group input[type="checkbox"]');
+    const cards = document.querySelectorAll('.job-card');
 
+    // Главная функция фильтрации
+    function filterJobs() {
+        // Собираем массив выбранных навыков
+        const activeSkills = Array.from(checkboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.parentElement.textContent.trim());
 
+        console.log("Выбрано в меню:", activeSkills);
 
+        cards.forEach(card => {
+            const cardData = card.getAttribute('data-category');
+            if (!cardData) return;
 
+            // Делим по запятой и убираем пробелы (trim)
+            const cardCategories = cardData.split(',').map(item => item.trim());
 
-const clearBtn = document.getElementById('clear-all');
-clearBtn.addEventListener('click', () => {
-    // Находим ВСЕ чекбоксы
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            // Если ничего не выбрано — показываем всё. Иначе ищем совпадение.
+            const isVisible = activeSkills.length === 0 || 
+                              activeSkills.some(skill => cardCategories.includes(skill));
+
+            card.style.display = isVisible ? 'block' : 'none';
+        });
+    }
+
+    // Слушаем изменения на чекбоксах: и валидацию, и фильтр
     checkboxes.forEach(cb => {
-        cb.checked = false; // Снимаем галочку
-        errorLabel.style.color = 'red'; // Показываем ошибку
-        errorLabel.style.fontSize = '13px';
-        errorLabel.style.lineHeight ='20px';
-        clearBtn.style.opacity = '0';
-        clearBtn.style.height = '1px';
-        clearBtn.style.fontSize = '10px';
-        clearBtn.style.margin = '0';
+        cb.addEventListener('change', () => {
+            validateSkills();
+            filterJobs();
+        });
     });
-    // После сброса нужно обновить локальное хранилище
-    
-});
 
+    // Логика кнопки "Сбросить всё"
+    clearBtn.addEventListener('click', () => {
+        checkboxes.forEach(cb => cb.checked = false); // Снимаем все галочки
+        validateSkills(); // Прячем саму кнопку и возвращаем текст ошибки
+        filterJobs();    // Показываем все карточки обратно
+    });
+});

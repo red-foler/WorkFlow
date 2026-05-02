@@ -11,6 +11,7 @@ html{
     --bg-main: rgb(240, 240, 240);  
     --bg-white: #ffffff;
     --text-dark: #2d3436;
+    --text-light: #8d8d8d;
     --border-color: #e0e0e0;
     --accent-video: #ff7675; /* Цвет для видео-плашки */
     --accent-web: #74b9ff;   /* Цвет для веб-плашки */
@@ -103,6 +104,14 @@ body {
 }
 .pill-video { background-color: var(--accent-video); }
 .pill-web { background-color: var(--accent-web); }
+
+.SUBcategory-text{
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.text-video{color: var(--accent-video);}
+.text-web{color: var(--accent-web);}
+
 
 /* Правая панель (Закрепленная) */
 .sidebar {
@@ -211,7 +220,7 @@ body {
     overflow: hidden;
 }
 #skill-error{
-    color: red;
+    color: var(--text-light);
     font-size: 13px;
     transition: 0.2s;
 }
