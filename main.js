@@ -49,14 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardData = card.getAttribute('data-category');
             if (!cardData) return;
 
-            // Делим по запятой и убираем пробелы (trim)
             const cardCategories = cardData.split(',').map(item => item.trim());
-
-            // Если ничего не выбрано — показываем всё. Иначе ищем совпадение.
             const isVisible = activeSkills.length === 0 || 
                               activeSkills.some(skill => cardCategories.includes(skill));
 
-            card.style.display = isVisible ? 'block' : 'none';
+            if (isVisible) {
+                // Если карточка должна появиться
+                if (card.style.display !== 'block') {
+                    card.style.display = 'block';
+                    
+                    // Сбрасываем анимацию, чтобы она проигралась заново
+                    card.classList.remove('show-animation');
+                    void card.offsetWidth; // Магия: заставляем браузер пересчитать элемент
+                    
+                    // Добавляем класс с нашей новой анимацией newJob
+                    card.classList.add('show-animation');
+                }
+            } else {
+                // Если карточка скрывается
+                card.style.display = 'none';
+                card.classList.remove('show-animation');
+            }
         });
     }
 
