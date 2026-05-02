@@ -263,11 +263,10 @@ body {
     padding: 5px 0 10px 10px; /* Небольшой отступ слева и сверху */
 }
 
-/* 3. Когда мы кликаем, JS добавляет класс .active, и всё раскрывается */
-.skill-group.active .submenu {
-    grid-template-rows: 1fr; /* Раскрываем на всю высоту контента */
+.skill-group.active > .section-container > .submenu,
+.skill-group.active > .submenu {
+    grid-template-rows: 1fr;
 }
-
 /* 4. Опционально: добавь курсор, чтобы было понятно, что можно кликать */
 .skill-group h4 {
     display: flex;
@@ -332,3 +331,33 @@ body {
 .filter-section.active .arrow-icon {
     transform: rotate(180deg);
 }
+
+/* Убеждаемся, что стрелочка вращается и у главных категорий */
+.filter-section.skill-group .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Используем ваш существующий стиль стрелочки для заголовков секций */
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-image: url(./add/img/icons/black_trigle.png);
+    opacity: 0.7;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 0.3s ease-in-out;
+    transform: rotate(-90deg);
+}
+
+/* Поворот стрелки при активации */
+.filter-section.active .section-title::before {
+    transform: rotate(0deg);
+}
+
+/* Если вы хотите, чтобы при загрузке они были закрыты, 
+   убедитесь что .submenu всегда имеет grid-template-rows: 0fr; */

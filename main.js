@@ -1,9 +1,12 @@
-// 1. Функция раскрытия категорий (оставляем как была)
 function toggleCategory(element) {
+    // Останавливаем передачу клика выше по дереву DOM
+    if (window.event) window.event.stopPropagation(); 
+    
     const parent = element.closest('.skill-group');
-    parent.classList.toggle('active');
+    if (parent) {
+        parent.classList.toggle('active');
+    }
 }
-
 // Константы для элементов, которые нужны везде
 const errorLabel = document.getElementById('skill-error');
 const clearBtn = document.getElementById('clear-all');
