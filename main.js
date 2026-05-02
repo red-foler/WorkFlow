@@ -43,19 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Главная функция фильтрации
     function filterJobs() {
         // Собираем массив выбранных навыков
-        const activeSkills = Array.from(checkboxes)
-    .filter(cb => cb.checked)
-    .map(cb => {
-        // Если это чекбокс категории, у которой есть вложенные элементы,
-        // нам нужно собрать и их названия тоже.
-        const parentGroup = cb.closest('.skill-group, .filter-section');
-        const labels = parentGroup.querySelectorAll('.label-text, h4, .section-title');
-        
-        return Array.from(labels).map(label => label.textContent.trim());
-    })
-    .flat(); // Превращаем массив массивов в один плоский список
-
-        console.log("Выбрано в меню:", activeSkills);
+    const activeSkills = Array.from(checkboxes)
+    .filter(cb => cb.checked && cb.classList.contains('child-checkbox')) // Ищем только реальные навыки
+    .map(cb => cb.parentElement.textContent.trim());
 
         cards.forEach(card => {
             const cardData = card.getAttribute('data-category');
@@ -86,18 +76,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Слушаем изменения на чекбоксах: и валидацию, и фильтр
-    checkboxes.forEach(cb => {
-        cb.addEventListener('change', () => {
-            validateSkills();
-            filterJobs();
-        });
-    });
-
     // Логика кнопки "Сбросить всё"
     clearBtn.addEventListener('click', () => {
         checkboxes.forEach(cb => cb.checked = false); // Снимаем все галочки
         validateSkills(); // Прячем саму кнопку и возвращаем текст ошибки
         filterJobs();    // Показываем все карточки обратно
     });
+
+    document.addEventListener('change', (e) => {
+    const target = e.target;
+    if (target.type !== 'checkbox') return;
+
+    // 1. ЛОГИКА ВНИЗ (от родителя к детям)
+    if (target.classList.contains('section-parent-checkbox') || target.classList.contains('parent-checkbox')) {
+        const container = target.closest('.skill-group, .filter-section');
+        const children = container.querySelectorAll('input[type="checkbox"]');
+        children.forEach(child => child.checked = target.checked);
+    }
+
+    // 2. ЛОГИКА ВВЕРХ (рекурсивное обновление всех родителей)
+    // 2. ЛОГИКА ВВЕРХ (рекурсивное обновление всех родителей)
+    // 2. ЛОГИКА ВВЕРХ (ребенок -> родитель -> дедушка)
+    let current = target;
+    while (current) {
+        // Находим контейнер (подменю), в котором лежит наш текущий чекбокс
+        const currentSubmenu = current.closest('.submenu');
+        if (!currentSubmenu) break;
+
+        // Находим родительский блок, которому принадлежит это подменю
+        const parentGroup = currentSubmenu.closest('.skill-group, .filter-section');
+        if (!parentGroup) break;
+
+        // Находим именно тот чекбокс, который стоит в заголовке этого родителя
+        const parentCb = parentGroup.querySelector('.parent-checkbox, .section-parent-checkbox');
+
+        if (parentCb && parentCb !== current) {
+            // Проверяем все чекбоксы внутри этого подменю
+            const allChildCheckboxes = currentSubmenu.querySelectorAll('input[type="checkbox"]');
+            
+            // Если все дети внутри выбраны — ставим галочку родителю
+            const allChecked = Array.from(allChildCheckboxes).every(cb => cb.checked);
+            parentCb.checked = allChecked;
+
+            // Переходим к родителю, чтобы проверить уровень выше (дедушку)
+            current = parentCb;
+        } else {
+            break;
+        }
+    }
+
+    // 3. ОБНОВЛЕНИЕ ИНТЕРФЕЙСА
+    validateSkills();
+    filterJobs();
+});
 });
