@@ -61,29 +61,68 @@
 
 
         <aside class="sidebar">
-    <h3 >ВЫБЕРИТЕ ВАШИ НАВЫКИ:</h3>
-    <p id="skill-error">Чтобы настроить поиск вакансий точнее- необходимо выбрать хотя бы 1 пункт</p>
+    <h3>ВЫБЕРИТЕ ВАШИ НАВЫКИ:</h3>
+    <p id="skill-error">Выберите хотя бы один пункт</p>
     <button id="clear-all" class="btn-clear">Сбросить всё</button>
 
-    <div class="skill-group">
-        <h4 onclick="toggleCategory(this)" style="cursor: pointer;">Web-Development</h4>
-        
-        <div class="submenu">
-            <div class="submenu-content">
-                <label class="label-text"><input type="checkbox"> React</label>
-                <label class="label-text"><input type="checkbox"> Node.js</label>
-                <label class="label-text"><input type="checkbox"> CSS / HTML</label>
+    <div class="filter-section" data-section="it">
+        <div class="section-container">
+            <div class="header-row">
+                <input type="checkbox" class="section-parent-checkbox">
+                <div class="title-wrapper" onclick="toggleCategory(this)">
+                    <span class="section-title">IT-РАЗРАБОТКА</span>
+                    <img src="./add/img/icons/arrow.svg" class="arrow-icon">
+                </div>
+            </div>
+
+            <div class="submenu section-content">
+                
+                <div class="skill-group">
+                    <div class="header-row sub-header">
+                        <input type="checkbox" class="parent-checkbox">
+                        <div class="title-wrapper" onclick="toggleCategory(this)">
+                            <h4>Web-Development</h4>
+                            <img src="./add/img/icons/arrow.svg" class="arrow-icon">
+                        </div>
+                    </div>
+                    
+                    <div class="submenu">
+                        <div class="submenu-content">
+                            <label class="label-text"><input type="checkbox" class="child-checkbox"> React</label>
+                            <label class="label-text"><input type="checkbox" class="child-checkbox"> Node.js</label>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="skill-group">
-        <h4 onclick="toggleCategory(this)" style="cursor: pointer;">Video Edit</h4>
-        
-        <div class="submenu">
-            <div class="submenu-content">
-                <label class="label-text"><input type="checkbox"> Premiere Pro</label>
-                <label class="label-text"><input type="checkbox"> After Effects</label>
+    <div class="filter-section" data-section="media">
+        <div class="section-container">
+            <div class="header-row">
+                <input type="checkbox" class="section-parent-checkbox">
+                <div class="title-wrapper" onclick="toggleCategory(this)">
+                    <span class="section-title">МЕДИА & МОНТАЖ</span>
+                    <img src="./add/img/icons/arrow.svg" class="arrow-icon">
+                </div>
+            </div>
+
+            <div class="submenu section-content">
+                <div class="skill-group">
+                    <div class="header-row sub-header">
+                        <input type="checkbox" class="parent-checkbox">
+                        <div class="title-wrapper" onclick="toggleCategory(this)">
+                            <h4>Video Edit</h4>
+                            <img src="./add/img/icons/arrow.svg" class="arrow-icon">
+                        </div>
+                    </div>
+                    <div class="submenu">
+                        <div class="submenu-content">
+                            <label class="label-text"><input type="checkbox" class="child-checkbox"> Premiere Pro</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

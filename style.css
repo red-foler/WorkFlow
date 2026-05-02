@@ -293,3 +293,42 @@ body {
     transform: rotate(0deg);
 }
 
+/* Ряд заголовка: чекбокс + обертка текста со стрелкой */
+.header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 5px;
+}
+
+/* Обертка для текста и стрелки, которая кликается для открытия */
+.title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+/* Отступы для вложенности */
+.section-content {
+    padding-left: 20px;
+    margin-left: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sub-header h4 {
+    margin: 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Цвета разделов (полоска теперь на самом верхнем уровне) */
+[data-section="it"] .section-container { border-left: 4px solid #3498db; padding-left: 5px; }
+[data-section="media"] .section-container { border-left: 4px solid #e74c3c; padding-left: 5px; }
+
+/* Поворот стрелочки при открытии (убедись, что в JS добавляется класс .active) */
+.skill-group.active .arrow-icon, 
+.filter-section.active .arrow-icon {
+    transform: rotate(180deg);
+}
